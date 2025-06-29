@@ -344,6 +344,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.status(500).json({ message: "Failed to generate PDF" });
     }
   });
+  
+  // Health check routes for Railway
+  app.get("/", (req, res) => {
+    res.status(200).json({ status: "ok", message: "Gestão de Horas API is running" });
+  });
+
+  app.get("/health", (req, res) => {
+    res.status(200).json({ status: "healthy", timestamp: new Date().toISOString() });
+  });
+
   // Authentication routes
   app.post("/api/login", async (req, res) => {
     try {
